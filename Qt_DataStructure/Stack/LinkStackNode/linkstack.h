@@ -62,8 +62,5 @@ bool LinkStack<T>::MakeEmpty()
 {
     while (!this->IsEmpty())
         this->Pop();
-    if (tos == nullptr)
-        return true;
-    else
-        return false;
+    return tos == nullptr;
 }
