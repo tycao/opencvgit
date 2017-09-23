@@ -4,20 +4,20 @@ template<typename T>
 class LinkStackNode
 {
 public:
-    LinkStackNode(); // é»˜è®¤æ„é€ å‡½æ•°
-    LinkStackNode(T); // å«æœ‰ä¸€ä¸ªå½¢å‚ç±»å‹ä¸ºTçš„æ„é€ å‡½æ•°
+    LinkStackNode(); // Ä¬ÈÏ¹¹Ôìº¯Êı
+    LinkStackNode(T); // º¬ÓĞÒ»¸öĞÎ²ÎÀàĞÍÎªTµÄ¹¹Ôìº¯Êı
 
-    LinkStackNode<T>*& GetLink();   // ç”¨æˆ·æ¥å£å‡½æ•°ï¼šè¿”å›å¯¹è±¡åŒ…å«çš„ç§æœ‰æ•°æ®æˆå‘˜
-    T& GetData();   // æ¥å£å‡½æ•°ï¼šè¿”å›å¯¹è±¡åŒ…å«çš„ç§æœ‰æ•°æ®æˆå‘˜
+    LinkStackNode<T>*& GetLink();   // ÓÃ»§½Ó¿Úº¯Êı£º·µ»Ø¶ÔÏó°üº¬µÄË½ÓĞÊı¾İ³ÉÔ±
+    T& GetData();   // ½Ó¿Úº¯Êı£º·µ»Ø¶ÔÏó°üº¬µÄË½ÓĞÊı¾İ³ÉÔ±
 private:
-    LinkStackNode<T>* link; // æ•°æ®æˆå‘˜ï¼ˆæŒ‡é’ˆï¼‰
+    LinkStackNode<T>* link; // Êı¾İ³ÉÔ±£¨Ö¸Õë£©
     T data; //
 };
 template<typename T>
-LinkStackNode<T>::LinkStackNode() : link(nullptr) { } // é»˜è®¤æ„é€ å‡½æ•°
+LinkStackNode<T>::LinkStackNode() : link(nullptr) { } // Ä¬ÈÏ¹¹Ôìº¯Êı
 
 template<typename T>
-LinkStackNode<T>::LinkStackNode(T value) : data(value), link(nullptr) { } // å«æœ‰ä¸€ä¸ªå½¢å‚ç±»å‹ä¸ºTçš„æ„é€ å‡½æ•°
+LinkStackNode<T>::LinkStackNode(T value) : data(value), link(nullptr) { } // º¬ÓĞÒ»¸öĞÎ²ÎÀàĞÍÎªTµÄ¹¹Ôìº¯Êı
 
 template<typename T>
 LinkStackNode<T>*& LinkStackNode<T>::GetLink() { return this->link; }

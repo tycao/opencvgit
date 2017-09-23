@@ -7,8 +7,8 @@ template<typename T>
 class LinkStack
 {
 public:
-    LinkStack();  // é»˜è®¤æ„é€ å‡½æ•°
-    LinkStack(T); // å¸¦æœ‰ä¸€ä¸ªTç±»å‹å‚æ•°çš„æ„é€ å‡½æ•°
+    LinkStack();  // Ä¬ÈÏ¹¹Ôìº¯Êı
+    LinkStack(T); // ´øÓĞÒ»¸öTÀàĞÍ²ÎÊıµÄ¹¹Ôìº¯Êı
 
     LinkStack<T>& Push(T value);
     T& GetTop();
@@ -19,18 +19,18 @@ private:
     LinkStackNode<T>* tos;
 };
 
-// æˆå‘˜å‡½æ•°çš„å®ç°
+// ³ÉÔ±º¯ÊıµÄÊµÏÖ
 template<typename T>
-LinkStack<T>::LinkStack() : tos(nullptr) { }  // é»˜è®¤æ„é€ å‡½æ•°
+LinkStack<T>::LinkStack() : tos(nullptr) { }  // Ä¬ÈÏ¹¹Ôìº¯Êı
 template<typename T>
-LinkStack<T>::LinkStack(T value) : tos(new LinkStackNode<T>(value)) { } // å¸¦æœ‰ä¸€ä¸ªTç±»å‹å‚æ•°çš„æ„é€ å‡½æ•°
+LinkStack<T>::LinkStack(T value) : tos(new LinkStackNode<T>(value)) { } // ´øÓĞÒ»¸öTÀàĞÍ²ÎÊıµÄ¹¹Ôìº¯Êı
 
 template<typename T>
 LinkStack<T>& LinkStack<T>::Push(T value)
 {
     LinkStackNode<T>* add = new LinkStackNode<T>(value);
-    add->GetLink() = tos;   // å½“å‰çš„æ ˆé¡¶å…ƒç´ ï¼Œæˆä¸ºæ–°åŠ å…ƒç´ çš„åç»§ç»“ç‚¹ã€‚
-    tos = add; //  æ›´æ–°æ ˆé¡¶å…ƒç´  ï¼šä½¿åˆšåŠ è¿›æ¥çš„å…ƒç´ æˆä¸ºæ ˆé¡¶å…ƒç´ 
+    add->GetLink() = tos;   // µ±Ç°µÄÕ»¶¥ÔªËØ£¬³ÉÎªĞÂ¼ÓÔªËØµÄºó¼Ì½áµã¡£
+    tos = add; //  ¸üĞÂÕ»¶¥ÔªËØ £ºÊ¹¸Õ¼Ó½øÀ´µÄÔªËØ³ÉÎªÕ»¶¥ÔªËØ
     return *this;
 }
 
@@ -43,12 +43,12 @@ T& LinkStack<T>::GetTop()
 template<typename T>
 T LinkStack<T>::Pop()
 {
-    assert(tos != nullptr); // é¦–å…ˆåˆ¤æ–­é“¾å¼æ ˆéç©º
-    LinkStackNode<T>* old = tos;    // ç„¶åæš‚æ—¶è·å¾—æ ˆé¡¶å…ƒç´ çš„æŒ‡é’ˆ
-    tos = tos->GetLink();   // åˆ é™¤æ ˆé¡¶å…ƒç´ 
-    T data = old->GetData();    // è·å¾—ä¸´æ—¶æ ˆé¡¶å…ƒç´ çš„åŒ…å«çš„æ•°æ®ï¼Œå¸¦å›ä½œä¸ºæ±‰ä¹¦çš„è¿”å›å€¼ã€‚
-    delete old; // åˆ é™¤å½“å‰æ ˆé¡¶å…ƒç´ 
-    return data;  // è¿”å›æ—§çš„æ ˆé¡¶å…ƒç´ å†…åŒ…å«çš„æ•°æ®
+    assert(tos != nullptr); // Ê×ÏÈÅĞ¶ÏÁ´Ê½Õ»·Ç¿Õ
+    LinkStackNode<T>* old = tos;    // È»ºóÔİÊ±»ñµÃÕ»¶¥ÔªËØµÄÖ¸Õë
+    tos = tos->GetLink();   // É¾³ıÕ»¶¥ÔªËØ
+    T data = old->GetData();    // »ñµÃÁÙÊ±Õ»¶¥ÔªËØµÄ°üº¬µÄÊı¾İ£¬´ø»Ø×÷ÎªººÊéµÄ·µ»ØÖµ¡£
+    delete old; // É¾³ıµ±Ç°Õ»¶¥ÔªËØ
+    return data;  // ·µ»Ø¾ÉµÄÕ»¶¥ÔªËØÄÚ°üº¬µÄÊı¾İ
 }
 
 template<typename T>
