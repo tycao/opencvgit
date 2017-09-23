@@ -68,8 +68,12 @@ ubuntu下安装vftp 安装vsftpd后，登录ftp服务器时，会提示错误： 530 Login incorrect
 	touch /etc/allowed_users
 	sudo chmod 777 /etc/allowed_users
 	在/etc/allowed_users里添加ftp用户：ftp
+
 ![ftp_09](https://github.com/tycao/opencvgit/blob/master/FTP/src/ftp_09.png "ftp_09")
 
 * 使用gedit查看/etc/ftpusers文件中的内容打开"终端窗口"，输入"sudo gedit /etc/ftpusers"-->回车-->打开这个文件后，看一看有没有uftp这个用户名，如果没有，就直接退出。如果有就删除uftp,
 因为这个文件中记录的是不能访问FTP服务器的用户清单。（去掉root）
 
+
+### 链接
+[具体如何解决 "530 Login incorrect" 的ftp登录问题，可以参考此链接](http://www.cnblogs.com/bqx619/p/5021458.html)
