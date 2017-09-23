@@ -26,10 +26,15 @@ UBuntu16.10下安装ftp服务
 	touch /etc/vsftpd.chroot_list
 	sudo chmod 777 /etc/vsftpd.chroot_list
 然后在/etc/vsftpd.chroot_list文件里，添加ftp用户：ftp
+![ftp_03](https://github.com/tycao/opencvgit/blob/master/FTP/src/ftp_03.png "ftp_03")
+
+### 链接
+[具体可以参考百度经验，还是蛮有用的](https://jingyan.baidu.com/article/7908e85c988b23af481ad2ae.html)
 
 
+
 	
 	
 	
-或者用如下的方法修改/etc/vsftpd.conf配置文件的内容：
+ubuntu下安装vftp 安装vsftpd后，登录ftp服务器时，会提示错误： 530 Login incorrect
 ==================================================
