@@ -20,12 +20,13 @@ UBuntu16.10下安装ftp服务
 	chroot_local_user=YES（是否将所有用户限制在主目录）
 	chroot_list_enable=YES（是否启动限制用户的名单）
 	chroot_list_file=/etc/vsftpd.chroot_list（可在文件中设置多个账号）
-![](ftp_02)
-![](ftp_01)
+![ftp_02](https://github.com/tycao/opencvgit/blob/master/FTP/src/ftp_02.png "ftp_02")
+![ftp_01](https://github.com/tycao/opencvgit/blob/master/FTP/src/ftp_01.png "ftp_01")
 ## 然后创建上述chroot_list_file文件的路径 ： /etc/vsftpd.chroot_list
 	touch /etc/vsftpd.chroot_list
 	sudo chmod 777 /etc/vsftpd.chroot_list
 然后在/etc/vsftpd.chroot_list文件里，添加ftp用户：ftp
+
 
 	
 	
