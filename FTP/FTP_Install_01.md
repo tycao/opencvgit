@@ -35,6 +35,7 @@ UBuntu16.10下安装ftp服务
 ![ftp_05](https://github.com/tycao/opencvgit/blob/master/FTP/src/ftp_05.png "ftp_05")
 ![ftp_06](https://github.com/tycao/opencvgit/blob/master/FTP/src/ftp_06.png "ftp_06")
 
+### 如果登录ftp总是出现密码错误，可以将/etc/vsftpd.conf配置文件的pam_service_name=vsftpd改为pam_service_name=ftp，即可解决。
 
 ### 链接
 [具体可以参考百度经验，还是蛮有用的](https://jingyan.baidu.com/article/7908e85c988b23af481ad2ae.html)
@@ -46,3 +47,8 @@ UBuntu16.10下安装ftp服务
 	
 ubuntu下安装vftp 安装vsftpd后，登录ftp服务器时，会提示错误： 530 Login incorrect
 ==================================================
+
+
+
+
+
