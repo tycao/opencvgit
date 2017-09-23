@@ -36,7 +36,7 @@ UBuntu16.10下安装ftp服务
 ![ftp_06](https://github.com/tycao/opencvgit/blob/master/FTP/src/ftp_06.png "ftp_06")
 
 ### 如果登录ftp总是出现密码错误，可以将/etc/vsftpd.conf配置文件的pam_service_name=vsftpd改为pam_service_name=ftp，即可解决。
-
+![ftp_07](https://github.com/tycao/opencvgit/blob/master/FTP/src/ftp_07.png "ftp_07")
 ### 链接
 [具体可以参考百度经验，还是蛮有用的](https://jingyan.baidu.com/article/7908e85c988b23af481ad2ae.html)
 
