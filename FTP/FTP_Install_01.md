@@ -94,5 +94,6 @@ ubuntu下安装vftp 安装vsftpd后，登录ftp服务器时，会提示错误： 530 Login incorrect
 ![ftp_15](https://github.com/tycao/opencvgit/blob/master/FTP/src/ftp_15.png "ftp_15")
 
 
+# 未完，待续。。。
 
 
