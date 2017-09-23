@@ -12,14 +12,14 @@ UBuntu16.10下安装ftp服务
 	sudo chmod 777 /home/ftp
 ### 对/etc/vsftpd.conf配置文件进行一定的修改。使用 sudo vi /etc/vsftpd.conf打开配置文件，如果你喜欢vim编辑器也可以使用它打开。
 	sudo vi /etc/vsftpd.conf
-* 打开/etc/vsftpd.conf配置文件后，对配置文件的内容进行一系列必要的修改
+* 打开/etc/vsftpd.conf配置文件后，对配置文件的内容进行一系列必要的修改：
 	* 将配置文件中”anonymous_enable=YES “改为 “anonymous_enable=NO”（是否允许匿名ftp，若不允许选NO）
 	* 取消如下配置前的注释符号：
-	local_enable=YES（是否允许本地用户登录）
-	write_enable=YES（是否允许本地用户写的权限）
-	chroot_local_user=YES（是否将所有用户限制在主目录）
-	chroot_list_enable=YES（是否启动限制用户的名单）
-	chroot_list_file=/etc/vsftpd.chroot_list（可在文件中设置多个账号）
+		*local_enable=YES（是否允许本地用户登录）
+		*write_enable=YES（是否允许本地用户写的权限）
+		*chroot_local_user=YES（是否将所有用户限制在主目录）
+		*chroot_list_enable=YES（是否启动限制用户的名单）
+		*chroot_list_file=/etc/vsftpd.chroot_list（可在文件中设置多个账号）
 ![ftp_02](https://github.com/tycao/opencvgit/blob/master/FTP/src/ftp_02.png "ftp_02")
 ![ftp_01](https://github.com/tycao/opencvgit/blob/master/FTP/src/ftp_01.png "ftp_01")
 ### 然后创建上述chroot_list_file文件的路径 ： /etc/vsftpd.chroot_list
