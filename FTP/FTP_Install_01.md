@@ -28,6 +28,14 @@ UBuntu16.10下安装ftp服务
 然后在/etc/vsftpd.chroot_list文件里，添加ftp用户：ftp
 ![ftp_03](https://github.com/tycao/opencvgit/blob/master/FTP/src/ftp_03.png "ftp_03")
 
+### 测试ftp，复制一些文件到/home/ftp目录下
+* 方法一：在浏览器中输入ftp://localhost，网页登录。
+![ftp_04](https://github.com/tycao/opencvgit/blob/master/FTP/src/ftp_04.png "ftp_04")
+* 方法二：在终端中输入ftp localhost，然后输入用户名与密码实现登录。
+![ftp_05](https://github.com/tycao/opencvgit/blob/master/FTP/src/ftp_05.png "ftp_05")
+![ftp_06](https://github.com/tycao/opencvgit/blob/master/FTP/src/ftp_06.png "ftp_06")
+
+
 ### 链接
 [具体可以参考百度经验，还是蛮有用的](https://jingyan.baidu.com/article/7908e85c988b23af481ad2ae.html)
 
