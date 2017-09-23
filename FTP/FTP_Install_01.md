@@ -34,6 +34,8 @@ UBuntu16.10下安装ftp服务
 ![ftp_06](https://github.com/tycao/opencvgit/blob/master/FTP/src/ftp_06.png "ftp_06")
 * 方法二：在终端中输入ftp localhost，然后输入用户名与密码实现登录。
 ![ftp_04](https://github.com/tycao/opencvgit/blob/master/FTP/src/ftp_04.png "ftp_04")
+* 方法三：在Windows下，使用 "ftp:ip_address" (ip_address代表UBuntu的内网ip地址)来登陆链接UBuntu的ftp服务
+![ftp_11](https://github.com/tycao/opencvgit/blob/master/FTP/src/ftp_11.png "ftp_11")
 
 ### 如果登录ftp总是出现密码错误，可以将/etc/vsftpd.conf配置文件的pam_service_name=vsftpd改为pam_service_name=ftp，即可解决。
 ![ftp_07](https://github.com/tycao/opencvgit/blob/master/FTP/src/ftp_07.png "ftp_07")
@@ -42,7 +44,6 @@ UBuntu16.10下安装ftp服务
 
 
 
-	
 	
 	
 ubuntu下安装vftp 安装vsftpd后，登录ftp服务器时，会提示错误： 530 Login incorrect
@@ -77,3 +78,21 @@ ubuntu下安装vftp 安装vsftpd后，登录ftp服务器时，会提示错误： 530 Login incorrect
 
 ### 链接
 [具体如何解决 "530 Login incorrect" 的ftp登录问题，可以参考此链接](http://www.cnblogs.com/bqx619/p/5021458.html)
+
+
+
+
+接下来，才算是进入了主题 O(∩_∩)O没错，以上都是环境的搭建。到这里才是所讲的主题：使用PHP的API登录FTP服务器。对文件进行操作：
+-----------------------------
+### 先上图：
+在我的UBuntu上的内网ip地址如下所示：
+![ftp_10](https://github.com/tycao/opencvgit/blob/master/FTP/src/ftp_10.png "ftp_10")
+使用PHP的登录界面如下所示：
+![ftp_12](https://github.com/tycao/opencvgit/blob/master/FTP/src/ftp_12.png "ftp_12")
+![ftp_13](https://github.com/tycao/opencvgit/blob/master/FTP/src/ftp_13.png "ftp_13")
+![ftp_14](https://github.com/tycao/opencvgit/blob/master/FTP/src/ftp_14.png "ftp_14")
+![ftp_15](https://github.com/tycao/opencvgit/blob/master/FTP/src/ftp_15.png "ftp_15")
+
+
+
+
