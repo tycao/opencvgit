@@ -215,6 +215,7 @@ ubuntu下安装vftp 安装vsftpd后，登录ftp服务器时，会提示错误： 530 Login incorrect
 ### 当然，在点击登录按钮之后，且进入manage.php页面之前，在这一过程中：会进行如下的很多的信息验证：
 * 验证ftp的主机名（或者hostname 或者ip地址）、ftp的端口号（默认是port 21）、ftp登录用户名和ftp登录密码 等信息是否正确
 	* 在此验证过程中，login.js里的很多事件会被触发：例如：登录按钮的click()事件、检测必填输入项是否有值，以决定是否启用提交按钮（input的focus事件）
+#### login.js
 ```php
 function CheckInput()
 {
