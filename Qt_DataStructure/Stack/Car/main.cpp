@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     string license_plate, action;
     // 按行读取数据
     string str;
-    while (getline(in, str))
+    while (getline(in, str))    // 获得文本内的每一行信息
     {
         if (!str.empty())
         {
