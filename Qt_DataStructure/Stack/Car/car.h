@@ -8,11 +8,11 @@ using namespace std;
 class car
 {
 public:
-    car(string, int);   // Ä¬ÈÏ¹¹Ôìº¯Êı
+    car(string, int);   // é»˜è®¤æ„é€ å‡½æ•°
     string getLicence() const;
     int getMovedTimes() const;
     void move();
-    virtual ~car(); // Îö¹¹º¯Êı
+    virtual ~car(); // ææ„å‡½æ•°
 private:
     string license;
     int movedTimes;
