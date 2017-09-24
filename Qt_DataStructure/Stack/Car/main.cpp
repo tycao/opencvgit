@@ -73,5 +73,4 @@ int main(int argc, char *argv[])
     }
     in.close(); // 关闭文件句柄
     return EXIT_SUCCESS;
-    //return 0;
 }
