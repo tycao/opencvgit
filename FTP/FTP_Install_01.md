@@ -96,6 +96,7 @@ ubuntu下安装vftp 安装vsftpd后，登录ftp服务器时，会提示错误： 530 Login incorrect
 ### PHP程序的整个目录树应该时这个样子的：
 ![ftp_16](https://github.com/tycao/opencvgit/blob/master/FTP/src/ftp_16.png "ftp_16")
 ### 首先，我们进入的首页面是index.php页面：
+#### index.php
 ```php
 <!DOCTYPE html>
 <html lang="en">
@@ -124,6 +125,536 @@ ubuntu下安装vftp 安装vsftpd后，登录ftp服务器时，会提示错误： 530 Login incorrect
 </body>
 </html>
 ```
+
+### 当我们输入完成信息，且成功登录UBuntu上的FTP server后，我们进入了manage.php页面：
+#### manage.php
+```php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="css/jqtree/jqtree.css">
+	<link rel="stylesheet" type="text/css" href="css/manage-style.css">
+	<link rel="stylesheet" type="text/css" href="css/artDialog/ui-dialog.css">
+	<link rel="stylesheet" type="text/css" href="css/smartMenu/smartMenu.css">
+	<script type="text/javascript" src="js/jquery-2.2.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="js/artDialog/dialog-min.js"></script>
+	<script type="text/javascript" src="js/smartMenu/jquery-smartMenu-min.js"></script>
+	<script type="text/javascript" src="js/jqtree/tree.jquery.js"></script>
+	<script type="text/javascript" src="js/form/jquery.form.min.js"></script>
+	<script type="text/javascript" src="js/manage.js"></script>
+	<title>FTP Tool Manage</title>
+</head>
+<body>
+	<div id="header">
+		<div id="header_userinfo">
+			<div id="header_userinfo_head"> <img  src="images/user.png"> </div>
+			<div id="header_userinfo_loginstate">
+				<div id="header_userinfo_name"></div>
+				<div id="header_userinfo_state">
+					<a href="#" id="header_userinfo_exit">退出</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="folder">
+		<div id="folderTree"></div>
+		<div id="folderList">
+			<div id="folderList_header">
+				<div id="folderList_header_logo">
+					<a href="#" title="根目录"><img src="images/home.png"/></a>
+				</div>
+				<div id="folderList_header_path">
+				</div>
+				<div id="folderList_header_back">
+					<a href="#" title="上一级"><img src="images/left.png" style="width: 40px" /></a>
+				</div>
+				<div id="folderList_header_toolbar">
+						<a id="folderList_header_toolbar_upload" href="#" ><img  src="images/upload.png"><span>上传</span></a>
+						<a id="folderList_header_toolbar_newfile" href="#"><img  src="images/newfile.png"><span>新建文件</span></a>
+						<a id="folderList_header_toolbar_newfolder" href="#"><img  src="images/newfolder.png"><span>新建文件夹</span></a>
+				 </div>
+
+			</div>
+			<div id="folderList_opeate">
+				<div id="folderList_opeate_upload">
+					<div id="drop_area">将文件拖拽到此区域</div>
+					<form id="form_uploadfile" action="upload.php" method="POST" enctype="multipart/form-data">
+						<input id="fileupload" type="file" name="files[]" multiple/form-data hidden/>
+						<button type="submit" id="bn_upload_start">开始</button>
+						<button type="button" id="bn_upload_add">添加</button>
+                		<button type="button" id="bn_upload_delete">删除</button>
+						<button type="button" id="bn_upload_cancel">取消</button>
+					</form>
+                	<div id="folderList_opeate_upload_filelist">
+                		<ol id="folderList_opeate_upload_filelist_ul_name">
+                		</ol>
+                		<ol id="folderList_opeate_upload_filelist_ul_size">
+                		</ol>
+                		<ol id="folderList_opeate_upload_filelist_ul_bn">
+                		</ol>
+                		<ol id="folderList_opeate_upload_filelist_ul_ck">
+                		</ol>
+                	</div>
+                
+                </div>
+			</div>
+			<div id="folderList_body">
+				<ul id="folerviewlist"></ul>
+			</div>
+		</div>
+	</div>
+
+	
+</body>
+</html>
+```
+
+### 当然，在点击登录按钮之后，且进入manage.php页面之前，在这一过程中：会进行如下的很多的信息验证：
+* 验证ftp的主机名（或者hostname 或者ip地址）、ftp的端口号（默认是port 21）、ftp登录用户名和ftp登录密码 等信息是否正确
+	* 在此验证过程中，login.js里的很多事件会被触发：例如：登录按钮的click()事件、检测必填输入项是否有值，以决定是否启用提交按钮（input的focus事件）
+```php
+function CheckInput()
+{
+	var bInputState = true;
+	$("input:text").each(function(index, el) 
+	{
+		if (el.value == "")
+		{
+			bInputState = false;
+		}
+	});
+
+	if (bInputState)
+	{
+		$("#submit_button").removeAttr('disabled');
+		$("#submit_button").removeClass("submit_buttonError");
+		$("#submit_button").addClass("submit_buttonOk");
+	}
+	else
+	{
+		$("#submit_button").addClass('submit_buttonError');
+		$("#submit_button").attr('disabled',"true");
+	}
+}
+
+$(document).ready(function() 
+{
+	$("input").focus(function(event) 
+	{
+		console.log('focus');
+		$("#hintText").text("登陆FTP服务器").addClass('hintOk');
+		$("#hintText").removeClass('hintError');
+		CheckInput();
+	});
+
+	//读取Cookie的值
+	$('#ftp_host').val($.cookie('ftp_cookie[0]'));
+	$('#ftp_port').val($.cookie('ftp_cookie[1]'));
+	$('#ftp_user').val($.cookie('ftp_cookie[2]'));
+	$('#ftp_pwd').val($.cookie('ftp_cookie[3]'));
+
+	//检测必填输入项是否有值，以决定是否启用提交按钮
+	$("input").change(function()
+	{
+		$("#hintText").text("登陆FTP服务器").addClass('hintOk');
+		$("#hintText").removeClass('hintError');
+		CheckInput();
+	});
+	
+	//登录按钮获得焦点
+	$("#submit_button").mouseenter(function()
+	{		
+		CheckInput();
+	});
+	//提交表单，登录FTP，成功则跳转至服务器返回的页面，失败则显示出错信息
+	$("#submit_button").click(function(event) 
+	{
+		$("#hintText").text("正在登陆FPT服务器......");
+		$.ajax(
+		{
+			url: 'web_login.php',
+			type: 'POST',
+			dataType: 'JSON',
+			data:$('#ftp_info').serialize(),
+		})
+		.done(function(json)
+		{
+			if (json.state == 0)
+			{
+				$("#hintText").text("登陆成功");
+				location.href = json.msg;
+			}
+			else
+			{
+				$("#hintText").text(json.msg).addClass('hintError');
+			}
+		});
+		.error(function(json) 
+		{
+			$("#hintText").text('错误：服务器发生未知错误').addClass('hintError');
+		});
+		return false;
+	});
+});
+```
+### login.js验证成功后，就会进入web_login.php:
+#### web_login.php
+```php
+<?php
+	require_once('FTP.php');
+	use badtudou\FTP as FTP;
+
+	define('DEBUG', true);
+	if (!defined('DEBUG'))
+	{
+		error_reporting(0);
+	}
+
+	//未提交登录表单
+	if (!isset($_POST['ftp_host']))
+	{
+		header("Location: http:index.php"); 
+		exit();
+	}
+	if (!isset($_SESSION))
+	{
+		session_start();
+	}
+
+	$ftp_host = $_POST['ftp_host'];
+	$ftp_port =  (integer)$_POST['ftp_port'];
+	$ftp_user = $_POST['ftp_user'];
+	$ftp_pwd  = $_POST['ftp_pwd'];
+	$ftpManage = new FTP($ftp_host, $ftp_port, $ftp_user, $ftp_pwd);
+	$ftpManage->loginCheck();
+	session_write_close();
+?>
+```
+###如上所述， web_login.php里面引用了FTP.php，且实例化了一个FTP类的一个实例（对象），并且调用了FTP类的loginCheck()方法：
+#### FTP.php
+```
+<?php
+	namespace badtudou;
+	require_once('LIB.php');
+	class FTP
+	{
+		protected $m_host;
+		protected $m_port;
+		protected $m_user;
+		protected $m_pwd;
+		protected $m_resource;
+		protected $m_ConnectState;
+		protected $m_LoginState;
+
+		public function __construct($host, $port, $user, $pwd)
+		{
+			$this->m_host = $host;
+			$this->m_port = $port;
+			$this->m_user = $user;
+			$this->m_pwd  = $pwd;
+			$this->m_ConnectState = false;
+			$this->m_LoginState = false;
+		}
+
+		/**
+		 * [析构函数，释放FTP资源]
+		 */
+		public function __destruct()
+		{
+			if ($this->getConnectState())
+			{
+				ftp_close($this->m_resource);
+			}
+		}
+
+		/**
+		 * [连接FTP服务器,成功则将连接状态设置为true]
+		 */
+		public function connect()
+		{
+			$this->m_resource = @ftp_connect($this->m_host, $this->m_port, 30);
+			if ($this->m_resource)
+			{
+				$this->m_ConnectState = true;
+			}
+		}
+
+		/**
+		 * [登录FTP用户，若成功则将登录状态设置为true]
+		 */
+		public function login()
+		{
+			try
+			{
+				if (@ftp_login($this->m_resource, $this->m_user, $this->m_pwd) )
+				{
+					ftp_pasv($this->m_resource, true);
+					$this->m_LoginState = true;
+				}
+			}
+			catch(Exception $e)
+			{
+				throw new Exception("Error Processing Request", 1);
+			}
+		}
+
+		/**
+		 * [关闭FTP连接，并将连接状态设置为false]
+		 */
+		public function close()
+		{
+			ftp_close($this->m_resource);
+			$this->m_LoginState = false;
+		}
+
+		/**
+		 * [登录FTP用户，成功则创建会话 Cookie 索引文件，否则向客户端输出错误信息]
+		 */
+		function loginCheck()
+		{
+			$this->connect();
+			if ($this->getConnectState())
+			{
+				$this->login();
+				if ($this->getLoginState())
+				{
+					CreateSession($this);
+					SendAnswer(0 , 'manage.php');
+				}
+				else
+				{
+					SendAnswer(2 , 'FTP用户名或密码错误');
+				}
+			}
+			else
+			{
+				SendAnswer(1 , '无法连接FTP服务器');
+			}
+		}
+
+		/**
+		 * [获取连接状态]
+		 * @return [bool] [true:已连接; false:未连接]
+		 */
+		public function getConnectState()
+		{
+			return $this->m_ConnectState;
+		}
+
+		/**
+		 * [获取登录状态]
+		 * @return [bool] [true:已登录; false:未登录]
+		 */
+		public function getLoginState()
+		{
+			return $this->m_LoginState;
+		}
+
+		/**
+		 * [获取FTP主机地址]
+		 * @return [string] [FTP主机地址]
+		 */
+		public function getHost()
+		{
+			return $this->m_host;
+		}
+
+		/**
+		 * [获取FTP端口]
+		 * @return [int] [FTP端口]
+		 */
+		public function getPort()
+		{
+			return $this->m_port;
+		}
+
+		/**
+		 * [获取FTP用户名]
+		 * @return [string] [FTP用户名]
+		 */
+		public function getUser()
+		{
+			return $this->m_user;
+		}
+
+		/**
+		 * [获取FTP密码]
+		 * @return [string] [FTP密码]
+		 */
+		public function getPWD()
+		{
+			return $this->m_pwd;
+		}
+
+		/**
+		 * [获取当前FTP路径]
+		 * @return [string] [当前FTP路径]
+		 */
+		public function getCurrentPath()
+		{
+			return ftp_pwd($this->m_resource);
+		}
+
+		/**
+		 * [获取指定路径下的文件列表]
+		 * @param  [string] $path [路径]
+		 * @return [array]       [文件列表数组]
+		 */
+		public function getFileList($path)
+		{
+			return ftp_nlist($this->m_resource, $path);
+		}
+
+		/**
+		 * [将指定路径为设置为FTP当前目录]
+		 * @param  [string] $path [路径]
+		 * @return [bool]       [true：成功; false:失败]
+		 */
+		public function changeDir($path)
+		{
+			return @ftp_chdir($this->m_resource, $path);
+		}
+
+		/**
+		 * [获取指定文件的大小]
+		 * @param  [string] $file [文件的完整路径]
+		 * @return [int]       [文件的字节数]
+		 */
+		public function getFileSize($file)
+		{
+
+			return  ftp_size($this->m_resource, $file);
+		}
+
+		/**
+		 * [在指定路径下创建文件夹]
+		 * @param  [string] $path   [路径]
+		 * @param  [string] $folder [文件夹名]
+		 * @return [bool]         [true:成功; false:失败]
+		 */
+		public function createFolder($path, $folder)
+		{
+			if ($this->changeDir($path))
+			{
+				if (ftp_mkdir($this->m_resource, $folder))
+				{
+					return true;
+				}
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		/**
+		 * [在指定路径下创建文件]
+		 * @param  [string] $path   [路径]
+		 * @param  [string] $file [文件名]
+		 * @return [bool]         [true:成功; false:失败]
+		 */
+		public function createFile($path, $file)
+		{
+			if ($this->changeDir($path))
+			{
+				fopen($file, 'w+');
+				if ( @ftp_nb_put($this->m_resource, $file, $file,  FTP_ASCII) == FTP_FINISHED)
+				{
+					unlink($file);
+					return true;
+				}
+				else
+				{
+					unlink($file);
+					return false;
+				}
+			}
+		}
+
+		/**
+		 * [删除指定路径的文件]
+		 * @param  [string] $file [文件路径]
+		 * @return [bool]         [true:成功; false:失败]
+		 */
+		public function deleteFile($file)
+		{
+			return ftp_delete($this->m_resource, $file);
+		}
+
+
+		/**
+		 * [文件重命名]
+		 * @param [string] $path       [路径]
+		 * @param [string] $file       [文件/文件夹]
+		 * @param [string] $oldname    [旧的文件名/文件夹名]
+		 * @param [string] $newname    [新的文件名/文件夹名]
+		 * @return [bool]         [true:成功; false:失败]
+		 */
+		public function rename($path, $oldname, $newname)
+		{
+			if ($this->changeDir($path))
+			{
+				return ftp_rename($this->m_resource, $oldname, $newname);
+			}
+
+			return false;
+		}
+
+		/**
+		 * [下载文件]
+		 * @param  [string] $remotefile [远程文件]
+		 * @param  [string] $localfile  [本地文件]
+		 * @return [bool]         [true:成功; false:失败]
+		 */
+		public function downloadFile($remotefile, $localfile)
+		{
+			$ret = ftp_nb_get($this->m_resource, $localfile, $remotefile,  FTP_BINARY);
+			while ($ret == FTP_MOREDATA)
+			{
+				$ret = ftp_nb_continue ($this->m_resource);
+			}
+			if ($ret != FTP_FINISHED)
+			{
+				return false;
+			}
+
+			return true;
+		}
+
+		/**
+		 * [上传文件]
+		 * @param  [string] $remotefile [远程文件]
+		 * @param  [string] $localfile  [本地文件]
+		 * @return [bool]         [true:成功; false:失败]
+		 */
+		public function uploadFile($remotefile, $localfile)
+		{
+			$ret = ftp_nb_put($this->m_resource, $remotefile, $localfile, FTP_BINARY);
+			while ($ret == FTP_MOREDATA) 
+			{
+			   $ret = ftp_nb_continue($this->m_resource);
+			}
+			if ($ret != FTP_FINISHED) 
+			{
+   				return false;
+   			}
+   			else
+   			{
+   				return true;
+   			}
+
+		}
+	}
+
+
+?>
+```
+### 在调用了FTP的loginCheck()后，根据上述代码可知，进入了manage.php
+manage.php的代码已经叙述过了，查看请往上翻。
+
 # 未完，待续。。。
 
 
