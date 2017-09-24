@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     stack<car*> parking_lot, tempStack;
     car* pcar;
     string license_plate, action;
-    // °´ÐÐ¶ÁÈ¡Êý¾Ý
+    // æŒ‰è¡Œè¯»å–æ•°æ®
     string str;
     while (getline(in, str))
     {
@@ -25,15 +25,15 @@ int main(int argc, char *argv[])
             istringstream text(str);
             text >> license_plate >> action;
             if (action == "arrives")
-                if (parking_lot.size() < 5) // Éè¶¨Í£³µ³¡Ö»ÄÜÍ£5Á¾³µ
+                if (parking_lot.size() < 5) // è®¾å®šåœè½¦åœºåªèƒ½åœ5è¾†è½¦
                 {
                     pcar = new car(license_plate, 0);
                     parking_lot.push(pcar);
                 }
                 else
-                    // µ±Í£³µ³¡ÒÑÂúÊ±£¬¶ÔÐÂÀ´³µÁ¾Êä³ö¡°³µÁ¾ÒÑÂú¡±µÄÐÅÏ¢£¨È»ºó²»×öÈÎºÎ²Ù×÷£¬Ñ­»·ÏÂÒ»ÌõÊý¾Ý£©
+                    // å½“åœè½¦åœºå·²æ»¡æ—¶ï¼Œå¯¹æ–°æ¥è½¦è¾†è¾“å‡ºâ€œè½¦è¾†å·²æ»¡â€çš„ä¿¡æ¯ï¼ˆç„¶åŽä¸åšä»»ä½•æ“ä½œï¼Œå¾ªçŽ¯ä¸‹ä¸€æ¡æ•°æ®ï¼‰
                     cout << "Sorry " << license_plate << " , The Lot is fully occupied!" << endl;
-            // ¶ÔÓÚÃ¿¸öÀë¿ªµÄ³µÁ¾£¬½«ÏàÓ¦µÄÔªËØ´ÓÕ»ÖÐÉ¾³ý
+            // å¯¹äºŽæ¯ä¸ªç¦»å¼€çš„è½¦è¾†ï¼Œå°†ç›¸åº”çš„å…ƒç´ ä»Žæ ˆä¸­åˆ é™¤
             else if (action == "departs")
             {
                 while (!parking_lot.empty() && parking_lot.top()->getLicence() != license_plate)
@@ -42,13 +42,13 @@ int main(int argc, char *argv[])
                     parking_lot.top()->move();
                     parking_lot.pop();
                 }
-                // Êä³öÃ¿Á¾³µµÄÒÆ¶¯Çé¿ö
+                // è¾“å‡ºæ¯è¾†è½¦çš„ç§»åŠ¨æƒ…å†µ
                 if (parking_lot.top()->getLicence() == license_plate)
                 {
                     cout << parking_lot.top()->getLicence() << " was moved "
                          << parking_lot.top()->getMovedTimes() << " times while it was here." << endl;
-                    delete parking_lot.top();   // ÊÍ·ÅÕ»ÖÐÖ¸ÕëËùÖ¸ÏòµÄ¶¯Ì¬ÄÚ´æ£¨¶ÔÏó£©
-                    parking_lot.pop();  // É¾³ýÕ»ÖÐµÄÖ¸Õë±äÁ¿
+                    delete parking_lot.top();   // é‡Šæ”¾æ ˆä¸­æŒ‡é’ˆæ‰€æŒ‡å‘çš„åŠ¨æ€å†…å­˜ï¼ˆå¯¹è±¡ï¼‰
+                    parking_lot.pop();  // åˆ é™¤æ ˆä¸­çš„æŒ‡é’ˆå˜é‡
                 }
                 else
                     cout << "Exception!" << endl;
@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
             else throw runtime_error("Invalid action for a car!!!");
         }
     }
-    // Êä³öÈÔÈ»±»Í£ÔÚÍ£³µ³¡ÀïµÄ³µÁ¾
+    // è¾“å‡ºä»ç„¶è¢«åœåœ¨åœè½¦åœºé‡Œçš„è½¦è¾†
     cout << "\n\nBelow cars are still in the lot:\n\n";
     while (!parking_lot.empty())
     {
@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
         delete parking_lot.top();
         parking_lot.pop();
     }
-    in.close(); // ¹Ø±ÕÎÄ¼þ¾ä±ú
+    in.close(); // å…³é—­æ–‡ä»¶å¥æŸ„
     return EXIT_SUCCESS;
     //return 0;
 }

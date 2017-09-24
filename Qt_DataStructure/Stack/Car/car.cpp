@@ -1,6 +1,6 @@
 #include "car.h"
 
-car::car(string license, int i = 0) : license(license), movedTimes(i) {}   // Ä¬ÈÏ¹¹Ôìº¯Êý
+car::car(string license, int i = 0) : license(license), movedTimes(i) {}   // é»˜è®¤æž„é€ å‡½æ•°
 string car::getLicence() const
 {
     return license;
