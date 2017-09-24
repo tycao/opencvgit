@@ -334,7 +334,7 @@ $(document).ready(function()
 	session_write_close();
 ?>
 ```
-###如上所述， web_login.php里面引用了FTP.php，且实例化了一个FTP类的一个实例（对象），并且调用了FTP类的loginCheck()方法：
+### 如上所述， web_login.php里面引用了FTP.php，且实例化了一个FTP类的一个实例（对象），并且调用了FTP类的loginCheck()方法：
 #### FTP.php
 ```
 <?php
