@@ -1,11 +1,7 @@
-#pragma once
+#include "binarysearch.h"
 
-#include <vector>
-#include <iostream>
 
-using namespace std;
-
-inline int binarySearch(const std::vector<int>& a, const int& x, int low, int high)
+int binarySearch(const std::vector<int>& a, const int& x, int low, int high)
 {
     if (low > high)
         return -1;
@@ -19,7 +15,7 @@ inline int binarySearch(const std::vector<int>& a, const int& x, int low, int hi
         return mid;
 }
 
-inline int Search(const vector<int>& a, const int& x)
+int Search(const vector<int>& a, const int& x)
 {
     return binarySearch(a, x, 0, a.size() - 1);
 }
