@@ -6,6 +6,7 @@
 #pragma once
 
 #include <queue>
+#include <stack>
 #include "binarytreenode.h"
 
 template<typename T>
@@ -32,7 +33,7 @@ public:
     void DeleteLeftChild(BinaryTreeNode<T>* p);     // 删除当前节点的左孩子
     void DeleteRightChild(BinaryTreeNode<T>* p);    // 删除当前节点的右孩子
 
-    virtual void PreOrderTraverse(BinaryTreeNode<T>* root);    // 先序遍历整棵树
+    virtual void PreOrderTraverse(BinaryTreeNode<T>* root) const;    // 前序遍历整棵树
     virtual void InOrderTraverse(BinaryTreeNode<T>* root) const;   // 中序遍历整棵树
     virtual void PostOrderTraverse(BinaryTreeNode<T>* root) const; // 后序遍历整棵树
     virtual void LevelOrderTraverse(BinaryTreeNode<T>* root) const;    // 按层遍历整棵树
@@ -172,19 +173,77 @@ void BinaryTree<T>::DeleteRightChild(BinaryTreeNode<T>* p)   // 删除当前节点的右
     Destroy(p->GetRightChild());
 }
 template<typename T>
-void BinaryTree<T>::PreOrderTraverse(BinaryTreeNode<T>* root)    // 先序遍历整棵树
+void BinaryTree<T>::PreOrderTraverse(BinaryTreeNode<T>* root)  const  // 前序遍历整棵树（先根遍历）
 {
+    // 这是一种递归实现方法。
+    if (nullptr != root)
+    {
+        cout << root->GetData();
+        PreOrderTraverse(root->GetLeftChild());
+        PreOrderTraverse(root->GetRightChild());
+    }
+
+    /*
+     // 另外一种是使用栈结构来完成二叉树的前序遍历
+
+    std::stack< BinaryTreeNode<T>* > s;
+    BinaryTreeNode<T>* p = root;
+    while (!s.empty() || nullptr != p)
+    {
+        while (p)
+        {
+            s.push(p);
+            cout << p->GetData();
+            p = p->GetLeftChild();
+        }
+        p = s.top();
+        s.pop();
+        p = p->GetRightChild();
+    }
+    */
 
 }
-template<typename T>
-void BinaryTree<T>::InOrderTraverse(BinaryTreeNode<T>* root) const   // 中序遍历整棵树
-{
 
+template<typename T>
+void BinaryTree<T>::InOrderTraverse(BinaryTreeNode<T>* root) const   // 中序遍历整棵树（中根遍历）
+{
+    // 这是一种递归实现的方法
+    if (nullptr != root)
+    {
+        InOrderTraverse(root->GetLeftChild());
+        cout << root->GetData();
+        InOrderTraverse(root->GetRightChild());
+    }
+    /*
+    // 这是一种使用栈结构来完成的二叉树的中根遍历
+    std::stack< BinaryTreeNode<T>* > s;
+    BinaryTreeNode<T>* p = root;
+    while (!s.empty() || nullptr != p)
+    {
+        while (p)
+        {
+            s.push(p);
+            p = p->GetLeftChild();
+        }
+        p = s.top();
+        s.pop();
+        cout << p->GetData();
+        p = p->GetRightChild();
+    }
+    */
 }
 template<typename T>
-void BinaryTree<T>::PostOrderTraverse(BinaryTreeNode<T>* root) const // 后序遍历整棵树
+void BinaryTree<T>::PostOrderTraverse(BinaryTreeNode<T>* root) const // 后序遍历整棵树（后根遍历）
 {
+    // 这是一种递归实现的方法
+    if (nullptr != root)
+    {
+        PostOrderTraverse(root->GetLeftChild());
+        PostOrderTraverse(root->GetRightChild());
+        cout << root->GetData();
+    }
 
+    // 这是一种使用栈结构实现的二叉树的后序遍历
 }
 template<typename T>
 void BinaryTree<T>::LevelOrderTraverse(BinaryTreeNode<T>* root) const    // 按层遍历整棵树

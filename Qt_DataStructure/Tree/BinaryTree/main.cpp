@@ -2,6 +2,17 @@
 
 int main(int argc, char *argv[])
 {
+    /*
+     * 二叉树的结构如下图所示：
+     *                   a
+     *                 /  \
+     *                B    C
+     *               / \  / \
+     *              D   E F  G
+     *
+     *
+     *
+    */
     BinaryTree<char> myBinTree('a');
 
     myBinTree.InsertLeftChild(myBinTree.GetRoot(), 'D');
@@ -23,6 +34,18 @@ int main(int argc, char *argv[])
 
     cout << "层次遍历结果如下： " << endl;
     myBinTree.LevelOrderTraverse(myBinTree.GetRoot());
+    cout << endl;
+
+    cout << "前序遍历（前根遍历）结果如下：" << endl;
+    myBinTree.PreOrderTraverse(myBinTree.GetRoot());
+    cout << endl;
+
+    cout << "中序遍历（中根遍历）结果如下：" << endl;
+    myBinTree.InOrderTraverse(myBinTree.GetRoot());
+    cout << endl;
+
+    cout << "后序遍历（后根遍历）结果如下：" << endl;
+    myBinTree.PostOrderTraverse(myBinTree.GetRoot());
     cout << endl;
 
     return 0;
