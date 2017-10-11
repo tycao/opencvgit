@@ -1,8 +1,10 @@
-#include <QCoreApplication>
+#include "huffman.h"
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication a(argc, argv);
+    // Unit Test
+    HuffmanTree* HT;
+    HuffmanCode HC;
 
-    return a.exec();
+    return 0;
 }
