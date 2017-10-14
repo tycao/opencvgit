@@ -1,5 +1,3 @@
-#include <cstring>
-#include <cstdlib>  // µÈ¼ÛÓÚ#include <malloc.h>
 #include "huffman.h"
 
 /*
@@ -139,7 +137,6 @@ void HuffmanCoding ( HuffmanTree* HT,
 */
 int LookFor(char* str, char letter, int count)
 {
-    int i;
     for (int i = 0; i != count; ++i)
         if (str[i] == letter)
             return i;
@@ -155,6 +152,44 @@ void OutputWeight( char* Data,
                    int** Weight,
                    int* Count )
 {
+    char* Letter = new char[Length];
+    int* LetterCount = new int[Length];
+    int i, AllCount = 0, index, Sum = 0;
+    float Persent = 0;
+    for (i = 0; i != Length; ++i)
+    {
+        if (i == 0)
+        {
+            Letter[0] = Data[i];
+            LetterCount[0] = 1;
+            ++AllCount;
+        }
+        else
+        {
+            index = LookFor(Letter, Data[i], AllCount);
+            if (index == -1)
+            {
+                Letter[AllCount] = Data[i];
+                LetterCount[AllCount] = 1;
+                ++AllCount;
+            }
+            else ++LetterCount[index];
+        }
+    }
 
+    for (i = 0; i != AllCount; ++i)
+        Sum = Sum + LetterCount[i];
+
+    *Weight = new int[AllCount];
+    *WhatLetter = new char[AllCount];
+    for (i = 0; i != AllCount; ++i)
+    {
+        Persent = static_cast<float>(LetterCount[i]) / static_cast<float>(Sum);
+        (*Weight)[i] = (int) (1000 * Persent);
+        (*WhatLetter)[i] = Letter[i];
+    }
+    *Count = AllCount;
+    delete [] Letter;
+    delete [] LetterCount;
 }
 
