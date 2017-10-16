@@ -18,6 +18,8 @@ public:
     int myCount(std::map<Part*, int>& myMap, const Part* p, int num);
 };
 
+
+
 class NameContainer
 {
 private:
@@ -30,3 +32,6 @@ public:
 
 // 声明一个全局函数
 void add_part(const std::string& x, int q, const std::string& y);
+
+// 这里是声明此类类型变量
+extern NameContainer partContainer;

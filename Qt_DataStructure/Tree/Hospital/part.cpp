@@ -1,5 +1,6 @@
 #include "part.h"
 
+// 这里是定义此自定义类型对象
 NameContainer partContainer;
 
 // 初始化构造函数
