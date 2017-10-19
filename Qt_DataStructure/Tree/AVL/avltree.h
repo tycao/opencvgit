@@ -72,31 +72,119 @@ void AvlTree<T>::RightBalanceAfterInsert(AvlNode<T>*& sRoot, bool& taller)
     AvlNode<T>* rightsub = sRoot->rightChild, *leftsub;
     switch (rightsub->balance) {
     case 1:
-
+        sRoot->balance = rightsub->balance = 0;
+        RotateLeft(sRoot);
+        taller = false;
         break;
     case 0:
-
+        cout << "平衡二叉搜索树已经平衡化。" << endl;
         break;
     case -1:
-
-    default:
+        leftsub = rightsub->leftChild;
+        switch (leftsub->balance) {
+        case 1:
+            sRoot->balance = -1;
+            rightsub->balance = 0;
+            break;
+        case 0:
+            sRoot->balance = rightsub->balance = 0;
+            break;
+        case -1:
+            sRoot->balance = 0;
+            rightsub->balance = 1;
+            break;
+        }
+        leftsub->balance = 0;
+        RotateRight(rightsub);
+        RotateLeft(sRoot);
+        taller = false;
         break;
     }
 }
 template<typename T>
 void AvlTree<T>::LeftBalanceAfterInsert(AvlNode<T>*& sRoot, bool& taller)
 {
-
+    AvlNode<T>* leftsub = sRoot->leftChild;
+    AvlNode<T> *rightsub;
+    switch (leftsub->balance) {
+    case -1:
+        sRoot->balance = leftsub->balance = 0;
+        RotateRight(sRoot);
+        taller = false;
+        break;
+    case 0:
+        cout << "平衡二叉搜索树已经平衡化。" << endl;
+    case 1:
+        rightsub = leftsub->rightChild;
+        switch (rightsub->balance) {
+        case -1:
+            sRoot->balance = 1;
+            leftsub->balance = 0;
+            break;
+        case 0:
+            sRoot->balance = leftsub->balance = 0;
+            break;
+        case 1:
+            sRoot->balance = 0;
+            leftsub->balance = -1;
+            break;
+        }
+        rightsub->balance = 0;
+        RotateLeft(leftsub);
+        RotateRight(sRoot);
+        taller = false;
+        break;
+    }
 }
+// 如果删除节点后，rt的左高度减少，则调用此函数进行平衡化
 template<typename T>
 void AvlTree<T>::RightBalanceAfterDelete(AvlNode<T>*& sRoot, bool& shorter)
 {
-
+    AvlNode<T>* rightsub = sRoot->rightChild, *leftsub;
+    switch (rightsub->balance) {
+    case 1:
+        sRoot->balance = rightsub->balance = 0;
+        RotateLeft(sRoot);
+        break;
+    case 0:
+        sRoot->balance = 0;
+        rightsub->balance = -1;
+        RotateLeft(sRoot);
+        break;
+    case -1:
+        leftsub = rightsub->leftChild;
+        switch (leftsub->balance) {
+        case -1:
+            sRoot->balance = 0;
+            rightsub->balance = 1;
+            break;
+        case 0:
+            sRoot->balance = rightsub->balance = 0;
+            break;
+        case 1:
+            sRoot->balance = -1;
+            rightsub->balance = 0;
+            break;
+        }
+        leftsub->balance = 0;
+        RotateRight(rightsub);
+        RotateLeft(sRoot);
+        shorter = false;
+        break;
+    }
 }
+//  如果删除节点后，rt的右高度减少，则调用此函数进行平衡化
 template<typename T>
 void AvlTree<T>::LeftBalanceAfterDelete(AvlNode<T>*& sRoot, bool& shorter)
 {
+    AvlNode<T>* leftsub = sRoot->leftChild, *rightsub;
+    switch (leftsub->balance) {
+    case 1:
 
+        break;
+    default:
+        break;
+    }
 }
 
 // 共有成员函数的实现
