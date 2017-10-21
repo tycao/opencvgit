@@ -36,7 +36,7 @@ AvlNode<T>::AvlNode()  // 构造函数
 }
 
 template<typename T>
-AvlNode<T>::AvlNode(const T& e, AvlNode<T>* lt = nullptr, AvlNode<T>* rt = nullptr) // 带有形式参数的构造函数
+AvlNode<T>::AvlNode(const T& e, AvlNode<T>* lt, AvlNode<T>* rt) // 带有形式参数的构造函数
     : leftChild(lt), rightChild(rt), balance(0), data(e)
 {
 
