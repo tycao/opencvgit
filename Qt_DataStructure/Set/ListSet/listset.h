@@ -4,9 +4,13 @@
 
 using namespace std;
 
+// 在这里再一次声明，竟然没有问题 O(∩_∩)O哈哈~
+template<typename T> std::ostream& operator <<(std::ostream& os, ListSet<T>& set);
+
 template<typename T>
 class ListSet
 {
+    // 这里一定要记住 全局函数的友元函数的声明的格式
     friend std::ostream& operator << <>(std::ostream& os, ListSet<T>& set);
 public:
     ListSet();  // default constructor function
@@ -175,7 +179,7 @@ bool ListSet<T>::operator == (ListSet<T>& another)
 
 
 
-// 全局函数
+// 现在，来实现在 listnode.h 里声明的operator <<()
 template<typename T>
 std::ostream& operator << (std::ostream& os, ListSet<T>& set)
 {

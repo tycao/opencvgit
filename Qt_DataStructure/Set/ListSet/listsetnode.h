@@ -7,6 +7,7 @@ using namespace std;
 // 类的前视声明
 template<typename T> class ListSet;
 
+// 首先 声明operator << ()运算符
 template<typename T> std::ostream& operator << (std::ostream& os, ListSet<T>& set);
 
 template<typename T>
