@@ -27,6 +27,10 @@ int main(int argc, char *argv[])
     os.Add(Item<std::string>(9, "Hi Dad-in-law!"));
 
     cout << os << endl;
+    cout << os.GetSize() << endl
+         << os.GetContain()->GetKey() << " : "
+         << os.GetContain()->GetData() << endl;
+    cout << os.search(9) << endl;
 
 #endif
 
