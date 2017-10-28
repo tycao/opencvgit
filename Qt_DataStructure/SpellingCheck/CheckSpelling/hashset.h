@@ -37,11 +37,15 @@ public:
 static const int num_primes = 25;
 static const unsigned long prime_list[] =
 {
-    53, 97, 193, 389, 769, 1543
+    53, 97, 193, 389, 769, 1543, 3079, 6151, 12289, 24593, 49157, 98317,
+    196613, 393241, 786433, 1572869, 3145739, 6291469, 12582917, 25165843,
+    50331653, 100663319, 201326611, 402653189, 805306457
 };
 // 成员函数的实现
 template<typename key_type, typename hash_func, typename key_equal>
-HashSet<key_type, hash_func, key_equal>::Entry::Entry() { }
+HashSet<key_type, hash_func, key_equal>::Entry::Entry()
+    : used(false)
+{ }
 
 template<typename key_type, typename hash_func, typename key_equal>
 int HashSet<key_type, hash_func, key_equal>::table_size() const
@@ -111,19 +115,50 @@ int HashSet<key_type, hash_func, key_equal>::size() const
 template<typename key_type, typename hash_func, typename key_equal>
 bool HashSet<key_type, hash_func, key_equal>::search(const key_type& k)
 {
-
+    int p = hf(k) % table_size();
+    while ((*ht)[p].used)
+    {
+        if (eq((*ht)[p].key, k))
+            return true;
+        ++p;
+        if (p == table_size())
+            p = 0;
+    }
+    return false;
 }
 
 template<typename key_type, typename hash_func, typename key_equal>
 void HashSet<key_type, hash_func, key_equal>::insert(const key_type& k)
 {
-
+    if (load_factor() > 0.7) resize();
+    int pp = hf(k) % table_size();
+    int p = pp;
+    while (p < table_size() && (*ht)[p].used)
+        ++p;
+    if (p == table_size())
+        p = 0;
+    while ((*ht)[p].used)
+        ++p;
+    (*ht)[p].key = k;
+    (*ht)[p].used = true;
+    ++entries;
 }
 
 template<typename key_type, typename hash_func, typename key_equal>
 void HashSet<key_type, hash_func, key_equal>::remove(const key_type& k)
 {
-
+    int p = hf(k) % table_size();
+    while ((*ht)[p].used)
+    {
+        if (eq((*ht)[p].key, k))
+        {
+            (*ht)[p].used = false;
+            --entries;
+            break;
+        }
+        ++p;
+        if (p == table_size()) p = 0;
+    }
 }
 
 

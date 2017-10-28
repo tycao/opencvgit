@@ -23,7 +23,7 @@ bool equality::operator ()(const std::string& A, const std::string& B) const // 
 // 类Dictionary
 Dictionary::Dictionary(const std::string& filename)    // 构造函数
 {
-    infile.open(filename.c_str());
+    std::ifstream infile(filename);
     if (!infile)
     {
         cerr << "can not open " << filename + " for input.\n";
