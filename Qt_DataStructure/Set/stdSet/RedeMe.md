@@ -30,7 +30,7 @@ STL中的set
 ```
 
 #### set_difference（取集合差集）  的用法：
-···cpp
+```cpp
 	ostream_iterator<int> out(cout , " ");
 	// 求集合MySet1和MySet2的差集
 	cout << "\nMySet1和MySet2的差集：";
