@@ -2,4 +2,4 @@
 --------------
 ³ÌÐò½ØÍ¼ÈçÏÂ
 =====
-![checkSpelling]( "checkSpelling")
+![checkSpelling](https://github.com/tycao/opencvgit/blob/master/Qt_DataStructure/SpellingCheck/data/checkSpelling.png "checkSpelling")
