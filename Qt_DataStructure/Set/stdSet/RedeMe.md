@@ -49,8 +49,8 @@ STL中的set
 	ostream_iterator<int> out(cout , " ");
 	// 求集合MySet1和MySet2的对称差
 	set_symmetric_difference(MySet1.begin(), MySet1.end(),
-							 MySet2.begin(), MySet2.end(),
-							 inserter(MySet3, MySet3.begin())); // inserter : 定义在头文件 <iterator> 内
+						 MySet2.begin(), MySet2.end(),
+						 inserter(MySet3, MySet3.begin())); // inserter : 定义在头文件 <iterator> 内
 	// 遍历MySet3
 	std::for_each(MySet3.begin(), MySet3.end(), [&](int i){ cout << i << " "; });
 ```
