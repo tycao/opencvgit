@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
     cout << endl;
     if (MySet2.find(5) != MySet2.end())
         cout << "MySet2 contains 5";
-    ostream_iterator<int> out(cout, " ");   // 定义在头文件 <iterator> 内
+    ostream_iterator<int> out(cout, " ");   // ostream_iterator : 定义在头文件 <iterator> 内
     // 求集合MySet1与MySet2的交集
     cout << "\nMySet1与MySet2的交集：";
     set_intersection( MySet1.begin(), MySet1.end(),
@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
     // 求集合MySet1和MySet2的对称差
     set_symmetric_difference(MySet1.begin(), MySet1.end(),
                              MySet2.begin(), MySet2.end(),
-                             inserter(MySet3, MySet3.begin()));
+                             inserter(MySet3, MySet3.begin())); // inserter : 定义在头文件 <iterator> 内
 
     cout << "MySet1和MySet2的对称差：";
     set<int>::iterator j = MySet3.begin();
