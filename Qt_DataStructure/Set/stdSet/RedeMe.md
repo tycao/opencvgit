@@ -9,7 +9,8 @@ STL中的set
 	* set_difference（取集合差集）、
 	* set_symmetric_difference（取集合对称差集）
 	* 等函数
-程序运行画面截图：
+	
+#### 程序运行画面截图：
 ![stdSet](https://github.com/tycao/opencvgit/blob/master/Qt_DataStructure/Set/stdSet/src/stdSet.png "stdSet")
 
 
