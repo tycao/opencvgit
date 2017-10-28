@@ -4,4 +4,4 @@ STL中的set
 此外，set中的元素是有序排列的，这一点与map相同。
 ============
 程序运行画面截图：
-![stdSet]( "stdSet")
+![stdSet](https://github.com/tycao/opencvgit/blob/master/Qt_DataStructure/Set/stdSet/src/stdSet.png "stdSet")
