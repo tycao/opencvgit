@@ -5,3 +5,13 @@ STL中的set
 ============
 程序运行画面截图：
 ![stdSet](https://github.com/tycao/opencvgit/blob/master/Qt_DataStructure/Set/stdSet/src/stdSet.png "stdSet")
+
+* set里面有 :
+	* set_intersection（取集合交集）、set_union（取集合交集）、
+	* set_difference（取集合差集）、set_symmetric_difference（取集合对称差集）
+	* 等函数
+	
+	
+----|----|----
+set_intersection （取集合交集）| set_union（取集合交集）
+set_difference （取集合差集）｜ set_symmetric_difference（取集合对称差集）
