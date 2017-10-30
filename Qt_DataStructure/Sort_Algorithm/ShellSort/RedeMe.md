@@ -2,8 +2,7 @@
 ========
 希尔排序：
 ---------
-#### 希尔排序 又称为缩小增量排序。该算法先取一个小于数据表中元素个数n的整数gap，并以此作为第一间隔。将数据表分为gap个子序列，所有距离为gap的对象都存放在同一个子序列中。
-这样，也就把数据表中的所有元素分成了gap个组。
+#### 希尔排序 又称为缩小增量排序。该算法先取一个小于数据表中元素个数n的整数gap，并以此作为第一间隔。将数据表分为gap个子序列，所有距离为gap的对象都存放在同一个子序列中。这样，也就把数据表中的所有元素分成了gap个组。
 ### 程序截图如下：
 ![shellsort](https://github.com/tycao/opencvgit/blob/master/Qt_DataStructure/Sort_Algorithm/ShellSort/src/ShellSort.png "shellsort")
 
