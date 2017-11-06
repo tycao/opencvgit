@@ -154,8 +154,8 @@ int main(int argc, char *argv[])
     std::cout << "q : " << q << std::endl;
     std::cout << "r : " << r << std::endl;
 
-    *q = *p;
-    //r = p;
+    q = p;
+   // r = p;
 
     std::cout << "after assigning values : \n";
     std::cout << "p : " << p << std::endl;
