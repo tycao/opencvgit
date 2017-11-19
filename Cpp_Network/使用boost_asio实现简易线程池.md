@@ -15,6 +15,8 @@
 ### 为了查找这个原因，[我用这里的第二种方式重新编译了boost源码](https://github.com/tycao/learngit/blob/master/Boost_Library_Cpp/boost_compile_method02.md)，可是问题还是出现。然后我就百度寻找问题答案，[在这里找到了答案](http://blog.csdn.net/hyqsong/article/details/47072467)<br />
 
 # 接下来，继续讲解利用boost::asio来进行网络编程
+### 程序的目录树如下：
+![thread_pool](https://github.com/tycao/opencvgit/blob/master/Cpp_Network/src/thread_pool.png "thread_pool")
 ### thread_pool.h
 ```cpp
 #pragma once
