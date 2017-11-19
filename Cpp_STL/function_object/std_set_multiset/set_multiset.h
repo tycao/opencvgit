@@ -1,0 +1,19 @@
+#pragma once
+
+#include <algorithm>
+
+
+namespace std {
+// ÉùÃ÷ÈÝÆ÷set
+template<typename T,
+         typename Compare = less<T>,
+         typename Allocator = allocator<T>>
+class set;
+
+// ÉùÃ÷ÈÝÆ÷multiset
+template<typename T,
+         typename Comapre = less<T>,
+         typename allocator = allocator<T>>
+class multiset;
+}
+
