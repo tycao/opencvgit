@@ -133,3 +133,11 @@ int main()
 }
 
 ```
+
+## 程序运行结果如下：
+### 第一次运行：
+![output01](https://github.com/tycao/opencvgit/blob/master/Cpp_Network/src/output01.png "output01")
+### 第二次运行：
+![output02](https://github.com/tycao/opencvgit/blob/master/Cpp_Network/src/output01.png "output02")
+### 第三次运行：
+![output03](https://github.com/tycao/opencvgit/blob/master/Cpp_Network/src/output01.png "output03")
