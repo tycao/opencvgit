@@ -15,3 +15,119 @@
 ### 为了查找这个原因，[我用这里的第二种方式重新编译了boost源码](https://github.com/tycao/learngit/blob/master/Boost_Library_Cpp/boost_compile_method02.md)，可是问题还是出现。然后我就百度寻找问题答案，[在这里找到了答案](http://blog.csdn.net/hyqsong/article/details/47072467)<br />
 
 # 接下来，继续讲解利用boost::asio来进行网络编程
+### thread_pool.h
+```cpp
+#pragma once
+
+#include <iostream>
+#include <thread>
+#include <vector>
+#include <boost/asio.hpp>
+
+
+using namespace std;
+using namespace boost;
+using namespace boost::asio;
+
+
+typedef std::shared_ptr<std::thread> thread_ptr;
+typedef std::vector<thread_ptr> vecThread;
+
+class ThreadPool
+{
+public:
+    // 构造函数
+    ThreadPool(int num);
+
+    // 析构函数
+    ~ThreadPool();
+
+    // 成员函数模版必须再类内定义
+    // F是一个函数或者函数对象类型， Args是F的形式参数类型
+    template<typename F, typename ...Args>
+    void post(F&& f, Args&& ...args)
+    {
+        io_.post(std::bind(std::forward<F>(f), std::forward<Args>(args)...));
+    }
+
+    // io_service提供的stop()方法，让run()结束进而释放线程资源
+    void stop();
+private:
+    bool             stopped_;
+    vecThread        threads_;
+    int              threadNum_;
+    asio::io_service io_;
+    asio::io_service::work work_;
+};
+
+```
+
+### thread_pool.cpp
+```cpp
+#include "thread_pool.h"
+
+
+// 构造函数
+ThreadPool::ThreadPool(int num)
+    : threadNum_(num),
+      stopped_(false),
+      work_(io_)
+{
+    for (int i = 0; i != threadNum_; ++i)
+        threads_.push_back(std::make_shared<std::thread>([&](){ io_.run(); }));
+        //threads_.push_back(std::shared_ptr<std::thread>(new std::thread([&](){ io_.run(); })));
+}
+
+// 析构函数
+ThreadPool::~ThreadPool()
+{
+    stop();
+}
+
+// io_service提供的stop()方法，让run()结束进而释放线程资源
+void ThreadPool::stop()
+{
+    if(!stopped_)
+    {
+        io_.stop();
+        for(auto t : threads_)
+            t->join();
+        stopped_ = true;
+    }
+}
+```
+
+### main.cpp
+```cpp
+#include "thread_pool.h"
+
+void test1(int x) {std::cout<<"test 1:"<<x<<std::endl;}
+void test2(int y) {std::cout<<"test 2:"<<y<<std::endl;}
+
+class FunctionObject
+{
+public:
+    void operator ()()
+    {
+        cout << "function object..." << endl;
+    }
+};
+
+int main()
+{
+    ThreadPool threads(5);
+    threads.post([](){std::cout<<"test 1"<<std::endl;});
+    threads.post([](){std::cout<<"test 2"<<std::endl;});
+    threads.post(FunctionObject());
+    threads.post(test1, 1);
+    threads.post(test2, 2);
+
+    std::chrono::milliseconds timespan(11160); // or whatever
+    std::this_thread::sleep_for(timespan);
+    //std::this_thread::sleep_for(2s);
+
+    // 在 thread 没有被析构之前，调用boost::asio::io_service 的stop()方法
+    threads.stop();
+}
+
+```
