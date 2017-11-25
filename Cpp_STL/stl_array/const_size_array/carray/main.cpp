@@ -27,5 +27,20 @@ int main(int argc, char *argv[])
     // print all elements of carray after transform operation
     PRINT_ELEMENT(a, "carray after transform: ");
 
+
+    // 测试 operator[], 超出数组实际长度，会抛出runtime_error异常
+    for (int i = 0; i != a.size(); ++i)
+        std::cout << a[i] << " ";
+    std::cout << std::endl;
+
+    try
+    {
+        std::cout << a[10] << std::endl;    // carray数组a的下标index最大值为9，共10各元素
+    }
+    catch(std::runtime_error& e)
+    {
+        std::cout << e.what() << std::endl;
+    }
+
     return 0;
 }

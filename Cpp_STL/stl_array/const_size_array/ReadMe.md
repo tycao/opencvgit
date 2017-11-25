@@ -1,6 +1,6 @@
 class C Array : 是一个数组外包装, 它是 "C array" 或者 "const size array"的缩写。
 =======
-#### C++之父 Bjarne Stroustrup在他所写的 <<The C++ Programming Language>> 一书的第三版中，介绍了一个很有用的数组包装类别， 性能部署为一般的数组，而且更安全。这是 "使用者自行定义STL容器" 的一个好例子。该容器所使用的就是 _包装法_：在数组外包装一层常用的容器界面。
+#### C++之父 Bjarne Stroustrup在他所写的 <<The C++ Programming Language>> 一书的第三版中，介绍了一个很有用的数组包装类别， 性能不输一般的数组，而且更安全。这是 "使用者自行定义STL容器" 的一个好例子。该容器所使用的就是 _包装法_：在数组外包装一层常用的容器界面。
 
 ### 本demo就是展现了C array的使用范例：
 
@@ -97,9 +97,23 @@ int main(int argc, char *argv[])
     // print all elements of carray after transform operation
     PRINT_ELEMENT(a, "carray after transform: ");
 
+
+    // 测试 operator[], 超出数组实际长度，会抛出runtime_error异常
+    for (int i = 0; i != a.size(); ++i)
+        std::cout << a[i] << " ";
+    std::cout << std::endl;
+
+    try
+    {
+        std::cout << a[10] << std::endl;    // carray数组a的下标index最大值为9，共10各元素
+    }
+    catch(std::runtime_error& e)
+    {
+        std::cout << e.what() << std::endl;
+    }
+
     return 0;
 }
-
 ```
 
 
