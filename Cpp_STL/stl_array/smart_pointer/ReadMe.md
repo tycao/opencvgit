@@ -4,8 +4,8 @@
 
 ### demo的目录树结构 ：
 * Project:
-** countedptr.h
-** main.cpp
+ ** countedptr.h
+ ** main.cpp
 ![CountedPtr](https://github.com/tycao/opencvgit/blob/master/Cpp_STL/stl_array/smart_pointer/src/CountedPtr.png "CountedPtr")
 
 ### countedptr.h
