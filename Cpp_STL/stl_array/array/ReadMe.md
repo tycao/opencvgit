@@ -43,3 +43,6 @@ int main(int argc, char *argv[])
     return 0;
 }
 ```
+
+### output of the demo:
+![output](https://github.com/tycao/opencvgit/blob/master/Cpp_STL/stl_array/array/src/output.png "output")
