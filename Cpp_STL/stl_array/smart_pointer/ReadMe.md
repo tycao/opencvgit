@@ -2,14 +2,10 @@
 ======
 #### 想要在STL容器中用到“Reference语义”（不论是因为元素的复制代价太大，或者是因为需要在不同的容器内 享用 同一个对象），就要采用智能型指针，避免可能的错误。这里有一个解决办法：对指针所指的对象采用 *引用计数（reference counting）智能型指针*。
 
-						   main.cpp
-						/
-					   /
 ### demo的目录树结构 ：
-					   \
-						\
-						  countedptr.h
-
+* Project:
+** countedptr.h
+** main.cpp
 ![CountedPtr](https://github.com/tycao/opencvgit/blob/master/Cpp_STL/stl_array/smart_pointer/src/CountedPtr.png "CountedPtr")
 
 ### countedptr.h
