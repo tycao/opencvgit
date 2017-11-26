@@ -6,7 +6,7 @@ Stream(流)迭代器
 ![ostream_output](https://github.com/tycao/opencvgit/blob/master/Cpp_STL/Stream_Iterator/src/ostream_output.png "ostream_output")
 
 ### std::istream_iterator<int> intRead(std::cin);
-![istream_output](https://github.com/tycao/opencvgit/blob/master/Cpp_STL/Stream_Iterator/src/ostream_output.png "istream_output")
+![istream_output](https://github.com/tycao/opencvgit/blob/master/Cpp_STL/Stream_Iterator/src/istream_output.png "istream_output")
 
 ### 输入流 和 输出流 
-![iostream_output](https://github.com/tycao/opencvgit/blob/master/Cpp_STL/Stream_Iterator/src/ostream_output.png "iostream_output")
+![iostream_output](https://github.com/tycao/opencvgit/blob/master/Cpp_STL/Stream_Iterator/src/iostream_output.png "iostream_output")
