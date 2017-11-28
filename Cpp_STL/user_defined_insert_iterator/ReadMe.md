@@ -114,4 +114,4 @@ int main(int argc, char *argv[])
 ```
 
 ### 程序输出结果：
-![output](https://github.com/tycao/opencvgit/blob/master/Cpp_STL/user_defined_insert_iterator/src/tree.png "output")
+![output](https://github.com/tycao/opencvgit/blob/master/Cpp_STL/user_defined_insert_iterator/src/output.png "output")
