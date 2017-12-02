@@ -24,8 +24,8 @@ int main(int argc, char *argv[])
     pos = std::remove_if(coll.begin(), coll.end(),
                     compose_f_gx_hx(
                                 std::logical_and<bool>(),
-                                std::bind(std::greater<int>(), std::placeholders::_1, 4),
-                                std::bind(std::less<int>(), std::placeholders::_1, 7)
+                                std::bind2nd(std::greater<int>(), 4),
+                                std::bind2nd(std::less<int>(), 7)
                              )
                          );
     // remove "removed" elements in coll

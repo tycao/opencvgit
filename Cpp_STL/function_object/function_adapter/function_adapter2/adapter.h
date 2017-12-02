@@ -5,7 +5,7 @@
 // class for the compose_f_gx_hx adapter
 template<typename OP1, typename OP2, typename OP3>
 class compose_f_gx_hx_t
-        : public std::unary_function<typename OP2::result_type, typename OP1::result_type>
+        : public std::unary_function<typename OP2::argument_type, typename OP1::result_type>
 {
 public:
     // constructor
@@ -17,7 +17,7 @@ public:
 
     // overload function callable operator 重载 函数调用运算符
     typename OP1::result_type
-    operator ()(const typename OP2::result_type& x) const
+    operator ()(const typename OP2::argument_type& x) const
     {
         return op1(op2(x), op3(x));
     }
