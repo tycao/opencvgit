@@ -1,5 +1,5 @@
 #include <iostream>
-#include <algorithm>
+#include <algorithm>    // for make_heap()
 #include "priority_queue.h"
 
 using namespace std;
@@ -34,6 +34,18 @@ int main(int argc, char *argv[])
         q.pop();
     }
     cout << "\n";
+
+    // check if there is any exception thrown.
+    q.pop();
+    q.pop();
+    q.pop();
+    q.pop();
+
+
+    q.top();
+    q.top();
+    q.top();
+    q.top();
 
     return 0;
 }
