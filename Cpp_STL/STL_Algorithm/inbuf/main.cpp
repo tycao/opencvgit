@@ -3,6 +3,8 @@
 
 int main(int argc, char *argv[])
 {
+    std::ios_base::sync_with_stdio(false);
+
     inbuf ib;   // 创建一个特殊的流缓冲区
     std::istream in(&ib);   // 用刚刚创建的流缓冲区 初始化input流（读取流 或 输入流）
 

@@ -49,4 +49,4 @@ inbuf::int_type inbuf::underflow() {
 }
 
 
-const int inbuf::buffersize = 20;
+const int inbuf::buffersize = 100;
