@@ -1,8 +1,15 @@
-#include <QCoreApplication>
+#include "self_defined_allocator.h"
+#include <vector>
 
-int main(int argc, char *argv[])
+using namespace std;
+
+int main (int argc, char *argv[])
 {
-    QCoreApplication a(argc, argv);
+    vector<int, my_allocator<int>> vInt{1, 3, 5, 7, 9, 2, 4, 6, 8, 10};
 
-    return a.exec();
+    for (auto i : vInt)
+        cout << i << " ";
+    cout << "\n";
+
+    return 0;
 }
