@@ -6,7 +6,7 @@
 #include <memory>
 #include <iostream>
 
-template <typename T, size_t Blocksize = 4096>
+template <typename T, size_t Blocksize = 4096>  /* 4kb = 1024 * 4 */
 class MemoryPool: public std::allocator<T> {
 public:
     using ptr = T*;

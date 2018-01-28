@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cassert>
-#include <ctime>
+#include <ctime>    // for clock(), CLOCKS_PER_SEC
 #include <vector>
 #include <stack>
 #include "MemoryPool.hpp"
@@ -18,13 +18,13 @@ double calc_time() {
     start = clock();
 
     // frequently push and pop elements on the stack
-    for (int j = 0; j < REPS; j++) {
+    for (int j = 0; j < REPS; ++j) {
         assert(stack.empty());
 
-        for (int i = 0; i < ELEMS; i++) {
+        for (int i = 0; i < ELEMS; ++i) {
             stack.push(i);
         }
-        for (int i = 0; i < ELEMS; i++) {
+        for (int i = 0; i < ELEMS; ++i) {
             stack.pop();
         }
     }
@@ -51,13 +51,13 @@ int main() {
     // use vector
     start = clock();
     std::vector<int> vec;
-    for (int j = 0; j < REPS; j++) {
+    for (int j = 0; j < REPS; ++j) {
         assert(vec.empty());
 
-        for (int i = 0; i < ELEMS; i++) {
+        for (int i = 0; i < ELEMS; ++i) {
             vec.push_back(i);
         }
-        for (int i = 0; i < ELEMS; i++) {
+        for (int i = 0; i < ELEMS; ++i) {
             vec.pop_back();
         }
     }
