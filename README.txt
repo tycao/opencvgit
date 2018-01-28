@@ -12,3 +12,4 @@ Creating a new branch is quick & simple
 =======
 Creating new branch called 'feature1' @2018-01-28
 >>>>>>> feature1
+Creating a new branch is quick AND simple
