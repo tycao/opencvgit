@@ -8,3 +8,6 @@ git remote add opencv git@github.com:tycao/opencvgit.git
 -----------------------------------------------------------
 Creating a new brabch 'dev' @2018-01-28
 merge with fast forward mode in brabch 'dev'
+
+work remains to be done.....
+work done now~
