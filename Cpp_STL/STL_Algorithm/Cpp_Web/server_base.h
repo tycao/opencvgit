@@ -98,7 +98,7 @@ namespace ShiyanlouWeb {
             boost::asio::async_read_until(*socket, *read_buffer, "\r\n\r\n",
             [this, socket, read_buffer](const boost::system::error_code& ec, size_t bytes_transferred) {
                 if(!ec) {
-                    // 注意：read_buffer->size() 的大小并一定和 bytes_transferred 相等， Boost 的文档中指出：
+                    // 注意：read_buffer->size() 的大小并不一定和 bytes_transferred 相等， Boost 的文档中指出：
                     // 在 async_read_until 操作成功后,  streambuf 在界定符之外可能包含一些额外的的数据
                     // 所以较好的做法是直接从流中提取并解析当前 read_buffer 左边的报头, 再拼接 async_read 后面的内容
                     size_t total = read_buffer->size();
@@ -179,7 +179,7 @@ namespace ShiyanlouWeb {
                         std::ostream response(write_buffer.get());
                         res_it->second[request->method](response, *request);
 
-                        // 在 lambda 中捕获 write_buffer 使其不会再 async_write 完成前被销毁
+                        // 在 lambda 中捕获 write_buffer 使其不会在 async_write 完成前被销毁
                         boost::asio::async_write(*socket, *write_buffer,
                         [this, socket, request, write_buffer](const boost::system::error_code& ec, size_t bytes_transferred) {
                             //HTTP 持久连接(HTTP 1.1):
